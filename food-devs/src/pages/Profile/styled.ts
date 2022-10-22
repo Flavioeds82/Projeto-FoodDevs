@@ -1,0 +1,14 @@
+import styled from 'styled-components';
+
+export const Container = styled.div`
+  .container{
+     width: 100%;
+     min-height: 100vh;
+     display: flex;
+
+     h1{
+        margin: auto;
+        text-align: center;
+     }
+  }
+`;
