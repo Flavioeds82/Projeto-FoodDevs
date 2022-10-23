@@ -7,6 +7,7 @@ import { PageBody } from '../../components/Page-Body';
 import { Cart } from '../../components/Cart';
 import Header from '../../components/Header';
 import Body from '../../components/Body';
+import Modal from '../../components/Modal';
 
 
 
@@ -27,6 +28,7 @@ export const Home: React.FC<indexProps> = () => {
                <Body search={headerSearch} onSearch={setHeaderSearch}/>
                <Cart/>
             </PageBody>
+            <Modal/>
           </div>
       </Container>
       
