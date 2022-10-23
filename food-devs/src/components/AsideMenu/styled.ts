@@ -2,14 +2,15 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   .container{
-
-   .menu-aside{
+     .menu-aside{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 6.5rem;
-        height: 100vh;
+        min-height: 100vh;
+        
+        
         background-color: rgba(19,103,18,150);
       .aside-icon{
          display: flex;

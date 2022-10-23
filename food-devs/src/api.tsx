@@ -8,9 +8,17 @@ export default {
          if(json.error != ""){throw json.error;}
          return json.result;
       } catch (error) {
-         return "Categorias não encontradas(api)"
+         return error;
+      }  
+   },
+   getProducts: async ()=>{
+      try {
+         const response = await fetch(`${BASE}/products`);
+         const json = await response.json();
+         if(json.error != ""){throw json.error;}
+         return json.result;
+      } catch (error) {
+         return error;
       }
-      
-      
    }
 };

@@ -11,7 +11,14 @@ export type Category = {
 
 export interface ProductResponse {
    error:  string;
-   result: Product;
+   result: Products;
+}
+
+export interface Products {
+   total: number;
+   page:  number;
+   pages: number;
+   data:  Product[];
 }
 
 export interface Product {

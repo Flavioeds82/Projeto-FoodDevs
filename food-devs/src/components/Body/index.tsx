@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Container from './styled';
 import api from '../../api';
-import { Category } from '../../types';
+import { Category, Product, Products } from '../../types';
 import food_icon from "../../assets/images/food-and-restaurant.png";
+import next_icon from "../../assets/images/next.png";
 import ReactTooltip from 'react-tooltip';
 
 
@@ -11,7 +12,13 @@ import ReactTooltip from 'react-tooltip';
 const Body: React.FC = () => {
 
    const [categories, setCategories] = useState<Category[]>([]);
+   const [products, setProducts] = useState<Product[]>([]);
    const [activeCategory, setActiveCategory] = useState<number>(0);
+
+   async function getProducts(){
+      const res = await api.getProducts();
+      setProducts(res.data);
+   }
 
    useEffect(() => {
      
@@ -22,6 +29,12 @@ const Body: React.FC = () => {
       }
       getCategories();
    }, []);
+
+   useEffect(() => {
+      
+      getProducts();
+      
+   }, [activeCategory]);
 
    return (
       <Container>
@@ -56,7 +69,21 @@ const Body: React.FC = () => {
             </div>
             
             <div className="products">
-               
+               {
+                  products.map((item, index)=>
+                     <div className="product-item" key={index}>
+                        <div className="product-image"><img src={item.image} alt="" /></div>
+                        <div className="product-text">
+                           <div className="product-title">{item.name}</div>
+                           <div className="product-price">{`${item.price}g`}</div>
+                           <div className="product-ingredients">{item.ingredients}</div>
+                        </div>
+                        <div className="product-icon">
+                           <img src={next_icon} alt="" />
+                        </div>
+                     </div>
+                  )
+               }
             </div>
 
          </div>
