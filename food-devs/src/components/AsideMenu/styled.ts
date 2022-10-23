@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-position: fixed;
-width: 100%;
   .container{
      .menu-aside{
         display: flex;

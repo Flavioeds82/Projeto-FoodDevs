@@ -32,6 +32,7 @@ const Body: React.FC = () => {
 
    useEffect(() => {
       
+      setProducts([]);
       getProducts();
       
    }, [activeCategory]);
@@ -75,7 +76,7 @@ const Body: React.FC = () => {
                         <div className="product-image"><img src={item.image} alt="" /></div>
                         <div className="product-text">
                            <div className="product-title">{item.name}</div>
-                           <div className="product-price">{`${item.price}g`}</div>
+                           <div className="product-price">{`R$ ${item.price}`}</div>
                            <div className="product-ingredients">{item.ingredients}</div>
                         </div>
                         <div className="product-icon">

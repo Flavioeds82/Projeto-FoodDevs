@@ -9,7 +9,6 @@ export const Container = styled.div`
     background-image: url(${bg});
     text-align: center;
     overflow-y: auto;
-    margin-left: 6.5rem;
 
 
     .container{

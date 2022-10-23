@@ -69,6 +69,7 @@ const Container = styled.div`
             background-color: #FFF;
             border-radius: 0.5rem;
             cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.4);
 
             .product-image img{
                width: 6rem;
