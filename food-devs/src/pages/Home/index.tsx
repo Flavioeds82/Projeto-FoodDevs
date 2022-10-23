@@ -24,7 +24,7 @@ export const Home: React.FC<indexProps> = () => {
             <AsideMenu/>
             <PageBody>
                <Header search={headerSearch} onSearch={setHeaderSearch}/>
-               <Body/>
+               <Body search={headerSearch} onSearch={setHeaderSearch}/>
                <Cart/>
             </PageBody>
           </div>

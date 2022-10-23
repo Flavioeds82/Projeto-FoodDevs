@@ -20,7 +20,9 @@ const Header: React.FC<HeaderProps> = ({search, onSearch }) => {
    }
    useEffect(() => {
       if(search == ''){
-         setClicked(false)
+         setTimeout(() => {
+            setClicked(false);
+         }, 3000);
       }
    }, [search]);
 

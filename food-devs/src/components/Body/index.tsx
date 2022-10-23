@@ -6,10 +6,13 @@ import food_icon from "../../assets/images/food-and-restaurant.png";
 import next_icon from "../../assets/images/next.png";
 import ReactTooltip from 'react-tooltip';
 
+interface BodyProps {
+   search: string;
+   onSearch:  React.Dispatch<React.SetStateAction<string>>;
+}
 
 
-
-const Body: React.FC = () => {
+const Body: React.FC<BodyProps> = ({search, onSearch }) => {
 
    const [categories, setCategories] = useState<Category[]>([]);
    const [products, setProducts] = useState<Product[]>([]);
@@ -35,7 +38,7 @@ const Body: React.FC = () => {
       setProducts([]);
       getProducts();
       
-   }, [activeCategory]);
+   }, [activeCategory, search]);
 
    return (
       <Container>
