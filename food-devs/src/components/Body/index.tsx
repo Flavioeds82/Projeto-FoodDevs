@@ -3,6 +3,8 @@ import Container from './styled';
 import api from '../../api';
 import { Category } from '../../types';
 import food_icon from "../../assets/images/food-and-restaurant.png";
+import ReactTooltip from 'react-tooltip';
+
 
 
 
@@ -15,7 +17,8 @@ const Body: React.FC = () => {
      
       const getCategories = async ()=>{
          const res = await api.getCategories();
-         setCategories(res)
+         setCategories(res);
+         ReactTooltip.rebuild();
       }
       getCategories();
    }, []);
@@ -23,6 +26,7 @@ const Body: React.FC = () => {
    return (
       <Container>
          <div className="container">
+
             <div className="category">
                <div className="category-label">
                   <h4>Escolha uma categoria</h4>
@@ -31,6 +35,8 @@ const Body: React.FC = () => {
                      <div 
                         className={activeCategory == 0 ? "category-icon-default active" : "category-icon-default"}
                         onClick={()=>setActiveCategory(0)}
+                        data-tip="Todas as Categorias"
+                        data-for="top"
                      >
                         <img src={food_icon} alt="" />
                      </div>
@@ -39,6 +45,8 @@ const Body: React.FC = () => {
                            className={activeCategory == cat.id ? "category-item active" : "category-item"} 
                            key={index}
                            onClick={()=>setActiveCategory(cat.id)}
+                           data-tip={cat.name}
+                           data-for="top"
                         >
                            <img src={cat.image} alt="" />
                         </div>
@@ -46,6 +54,11 @@ const Body: React.FC = () => {
                   
                </div>
             </div>
+            
+            <div className="products">
+               
+            </div>
+
          </div>
       </Container>
    );

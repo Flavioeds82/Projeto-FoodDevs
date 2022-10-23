@@ -25,9 +25,21 @@ export const AsideMenu: React.FC<indexProps> = () => {
       <Container>
          <div className="container">
             <div className="menu-aside">
-               <div className={isActive('/') ? "aside-icon active" : "aside-icon"} ><Link to={'/'}><img src={store} alt="store icon" /></Link></div>
-               <div className={isActive('/orders')? "aside-icon active" : "aside-icon"} ><Link to={'/orders'}><img src={order} alt="cart icon" /></Link></div>
-               <div className={isActive('/profile')? "aside-icon active" : "aside-icon"} ><Link to={'/profile'}><img src={profile} alt="profile icon" /></Link></div>
+               <div className={isActive('/') ? "aside-icon active" : "aside-icon"} data-tip="Loja" data-for="right" >
+                  <Link to={'/'}>
+                     <img src={store} alt="store icon" />
+                  </Link>
+               </div>
+               <div className={isActive('/orders')? "aside-icon active" : "aside-icon"} data-tip="Pedidos" data-for="right" >
+                  <Link to={'/orders'}>
+                     <img src={order} alt="cart icon" />
+                  </Link>
+               </div>
+               <div className={isActive('/profile')? "aside-icon active" : "aside-icon"} data-tip="Perfil" data-for="right" >
+                  <Link to={'/profile'} >
+                     <img src={profile} alt="profile icon" />
+                  </Link>
+               </div>
             </div>
           </div>
       </Container>
