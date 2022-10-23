@@ -1,3 +1,5 @@
+import { fieldList } from "./types";
+
 const BASE = "https://api.b7web.com.br/devsfood/api";
 
 export default {
@@ -11,12 +13,26 @@ export default {
          return error;
       }  
    },
-   getProducts: async ()=>{
+   getProducts: async (category?: number, search?: string)=>{
       try {
-         const response = await fetch(`${BASE}/products`);
+         let fields: any = {};
+
+         if(category !== 0){
+            fields.category = category;
+         }
+         
+         if(search !== ''){
+            fields.search = search;
+         }
+
+         let query = new URLSearchParams(fields).toString();
+         // console.log(category)
+         const response = await fetch(`${BASE}/products?${query}`);
          const json = await response.json();
          if(json.error != ""){throw json.error;}
          return json.result;
+
+
       } catch (error) {
          return error;
       }

@@ -30,3 +30,9 @@ export interface Product {
    ingredients: string;
    points:      number;
 }
+
+export interface fieldList {
+   category ?: number;
+   page ?:     number;
+   search ?:   string;
+}

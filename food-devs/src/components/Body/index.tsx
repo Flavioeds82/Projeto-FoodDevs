@@ -19,8 +19,9 @@ const Body: React.FC<BodyProps> = ({search, onSearch }) => {
    const [activeCategory, setActiveCategory] = useState<number>(0);
 
    async function getProducts(){
-      const res = await api.getProducts();
+      const res = await api.getProducts(activeCategory, search);
       setProducts(res.data);
+      console.log(activeCategory)
    }
 
    useEffect(() => {
