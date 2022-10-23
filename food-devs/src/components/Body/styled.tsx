@@ -68,6 +68,7 @@ const Container = styled.div`
             display: flex;
             background-color: #FFF;
             border-radius: 0.5rem;
+            cursor: pointer;
 
             .product-image img{
                width: 6rem;
