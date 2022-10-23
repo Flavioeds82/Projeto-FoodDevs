@@ -25,10 +25,14 @@ const Container = styled.div`
                width: 5rem;
                height: 5rem;
                margin-right: 1.5rem;
+               cursor: pointer;
 
                img{
                   width: 4rem;
                }
+            }
+            .category-icon-default.active{
+               background-color: #FFF;
             }
            
 
@@ -41,11 +45,15 @@ const Container = styled.div`
                width: 5rem;
                height: 5rem;
                margin-right: 1.5rem;
+               cursor: pointer;
 
 
                img{
                   width: 4rem;
                }
+            }
+            .category-item.active{
+               background-color: #FFF;
             }
          }
       }

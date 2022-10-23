@@ -9,6 +9,7 @@ import food_icon from "../../assets/images/food-and-restaurant.png";
 const Body: React.FC = () => {
 
    const [categories, setCategories] = useState<Category[]>([]);
+   const [activeCategory, setActiveCategory] = useState<number>(0);
 
    useEffect(() => {
      
@@ -27,11 +28,18 @@ const Body: React.FC = () => {
                   <h4>Escolha uma categoria</h4>
                </div>
                <div className="category-icons">
-                     <div className="category-icon-default">
+                     <div 
+                        className={activeCategory == 0 ? "category-icon-default active" : "category-icon-default"}
+                        onClick={()=>setActiveCategory(0)}
+                     >
                         <img src={food_icon} alt="" />
                      </div>
                      {categories.map((cat, index)=>
-                        <div className="category-item" key={index}>
+                        <div 
+                           className={activeCategory == cat.id ? "category-item active" : "category-item"} 
+                           key={index}
+                           onClick={()=>setActiveCategory(cat.id)}
+                        >
                            <img src={cat.image} alt="" />
                         </div>
                      )}

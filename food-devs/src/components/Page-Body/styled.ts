@@ -8,6 +8,7 @@ export const Container = styled.div`
     background-color: #00980D;
     background-image: url(${bg});
     text-align: center;
+    overflow-y: auto;
 
     .container{
         display: flex;
