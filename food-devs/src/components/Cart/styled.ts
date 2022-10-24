@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
    width: 18rem;
-   height: auto;
+   max-height: 80vh;
    background-color: rgba(19,103,18,150);
    position: fixed;
    bottom: 0;
@@ -28,6 +28,12 @@ export const Container = styled.div`
         .cart-text{
            color: #fff;
            font-size: 1rem;
+        }
+        .arrow-down{
+         img{
+            width: 1rem;
+            margin-left: 3rem;
+         }
         }
      }
      .cart-body{

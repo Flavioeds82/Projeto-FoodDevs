@@ -37,3 +37,9 @@ export interface fieldList {
    page ?:     number;
    search ?:   string;
 }
+export interface initialStateCart{
+   products: Product[];
+   address: string[];
+   discount: number;
+   delivery: number;
+};
