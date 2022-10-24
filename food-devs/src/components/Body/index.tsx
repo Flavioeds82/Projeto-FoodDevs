@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {useDispatch} from "react-redux";
 import Container from './styled';
 import api from '../../api';
 import { Category, Product, Products } from '../../types';
@@ -25,6 +26,7 @@ const Body: React.FC<BodyProps> = ({search, onSearch, modalActive, setModalActiv
    const [modalQt, setModalQt] = useState<number>(1);
    const [selectedProduct, setSelectedProduct] = useState<Product|undefined>(undefined)
    const sp = selectedProduct;
+   const dispatch = useDispatch();
 
    async function getProducts(){
       const res = await api.getProducts(activeCategory, search);
@@ -36,6 +38,13 @@ const Body: React.FC<BodyProps> = ({search, onSearch, modalActive, setModalActiv
       setModalActive(true);
       setSelectedProduct(item)
       setModalQt(1);
+   }
+   function handleAddCart(){
+      dispatch({
+         type: "ADD_PRODUCT",
+         payload:{selectedProduct, modalQt}
+      })
+      setModalActive(false);
    }
 
    useEffect(() => {
@@ -139,8 +148,8 @@ const Body: React.FC<BodyProps> = ({search, onSearch, modalActive, setModalActiv
                            </div>
                         </div>
                         <div className="content-bottom">
-                           <div className="bt-cancelar"onClick={()=> setModalActive(false)}>Cancelar</div>
-                           <div className="bt-addCart">Adicionar ao Carrinho</div>
+                           <div className="bt-cancelar" onClick={()=> setModalActive(false)}>Cancelar</div>
+                           <div className="bt-addCart" onClick={()=>handleAddCart()}>Adicionar ao Carrinho</div>
                         </div>
                      </div>
                   

@@ -29,6 +29,7 @@ export interface Product {
    price:       number;
    ingredients: string;
    points:      number;
+   qt ?:        number;
 }
 
 export interface fieldList {
