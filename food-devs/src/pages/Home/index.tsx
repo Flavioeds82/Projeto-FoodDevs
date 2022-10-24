@@ -18,6 +18,7 @@ interface indexProps {
 export const Home: React.FC<indexProps> = () => {
 
    const [headerSearch, setHeaderSearch] = useState<string>('');
+   const [modalActive, setModalActive] = useState<boolean>(false);
 
    return (
       <Container>
@@ -25,10 +26,14 @@ export const Home: React.FC<indexProps> = () => {
             <AsideMenu/>
             <PageBody>
                <Header search={headerSearch} onSearch={setHeaderSearch}/>
-               <Body search={headerSearch} onSearch={setHeaderSearch}/>
+               <Body 
+                  search={headerSearch} 
+                  onSearch={setHeaderSearch} 
+                  modalActive={modalActive} 
+                  setModalActive={setModalActive}
+               />
                <Cart/>
             </PageBody>
-            <Modal/>
           </div>
       </Container>
       

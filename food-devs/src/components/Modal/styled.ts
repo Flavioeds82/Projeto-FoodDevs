@@ -17,9 +17,18 @@ const Container = styled.div`
       height: 100vh;
 
       .modal-body{
-         width: 80%;
-         height: 70vh;
-         background-color: #FFF;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         min-width: 15rem;
+         max-width: 80%;
+         min-height: 10rem;
+         max-height: 90vh;
+         background-color: rgba(254,254,255,255);
+         border-radius: 1rem;
+         box-shadow: 0px 0px 10rem #000;
+         padding: 1rem;
+         overflow: auto;
       }
    }
 `;
