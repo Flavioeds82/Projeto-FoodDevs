@@ -43,3 +43,16 @@ export interface initialStateCart{
    discount: number;
    delivery: number;
 };
+
+export interface Address{
+   
+   id ?: number,
+   title ?: string,
+   number ?: string,
+   street1 ?: string,
+   street2 ?: string,
+   zipcode ?: string,
+   city ?: string,
+   state ?: string
+    
+}

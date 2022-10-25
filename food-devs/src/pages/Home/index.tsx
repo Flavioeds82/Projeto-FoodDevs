@@ -32,7 +32,7 @@ export const Home: React.FC<indexProps> = () => {
                   modalActive={modalActive} 
                   setModalActive={setModalActive}
                />
-               <Cart/>
+               <Cart modalActive={modalActive} setModalActive={setModalActive}/>
             </PageBody>
           </div>
       </Container>

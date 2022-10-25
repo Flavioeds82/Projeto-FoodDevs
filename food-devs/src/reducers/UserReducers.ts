@@ -4,7 +4,9 @@ import { AnyAction } from "redux";
 
 const initialState = {
    token: 123,
-   name: 'teste'
+   name: 'teste',
+   email: '',
+   address: []
 };
 
 export default (state = initialState, action: AnyAction)=>{

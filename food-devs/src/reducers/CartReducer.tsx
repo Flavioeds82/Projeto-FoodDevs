@@ -1,19 +1,28 @@
 import { AnyAction } from "redux";
-import { initialStateCart, Product } from "../types";
+import { Address, initialStateCart, Product } from "../types";
 
 
 
 const initialState = {
    products: [],
-   address: [],
+   address: {
+      id: 123,
+      title:'Minha Casa',
+      street1: 'Beatriz Brandão',
+      number: '123',
+      zipcode: '123123-123',
+      city: 'Itaguaí',
+      state:'Rio de Janeiro'
+   },
    discount: 0,
-   delivery: 0
+   delivery: 10
 };
 
 export default (state = initialState, action: AnyAction)=>{
+   let products:Product[] = [...state.products];
    switch (action.type) {
+
       case "ADD_PRODUCT":
-         let products:Product[] = [...state.products];
          let id = action.payload.selectedProduct.id;
          let index = products.findIndex((item) => item.id === id);
          if(index > -1){
@@ -22,17 +31,42 @@ export default (state = initialState, action: AnyAction)=>{
             products.push({
                ...action.payload.selectedProduct,
                qt: action.payload.modalQt
-
             })
          }
-
          console.log(products)
          return {...state, products: products};
          break;
+
+      case "CHANGE_ADDRESS":
+         
+            state.address.title =  action.payload.title,
+            state.address.street1 =  action.payload.street,
+            state.address.number =  action.payload.number,
+            state.address.zipcode =  action.payload.zipcode,
+            state.address.city =  action.payload.city,
+            state.address.state = action.payload.state
+         
+         return {state};
+         break;
    
-      // case "SET_NAME":
-      //    return {...state, name: action.payload.name};
-      //    break;
+      case "CHANGE_PRODUCT":
+         if(products[action.payload.key]){
+            switch (action.payload.type) {
+               case '-':
+                  products[action.payload.key].qt--;
+                  if(products[action.payload.key].qt === 0){
+                     products = products.filter((item, index)=> index != action.payload.key);
+                  }
+                  break;
+            
+               case '+':
+                  products[action.payload.key].qt++;
+                  break;
+            }
+         }
+         
+         return {...state, products: products};
+         break;
    }
    return state;
 }
