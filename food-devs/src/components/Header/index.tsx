@@ -4,8 +4,8 @@ import logo from "../../assets/images/logo.png";
 import search_icon from "../../assets/images/search.png";
 
 interface HeaderProps {
-   search: string;
-   onSearch:  React.Dispatch<React.SetStateAction<string>>;
+   search?: string;
+   onSearch?:  React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Header: React.FC<HeaderProps> = ({search, onSearch }) => {
@@ -14,17 +14,13 @@ const Header: React.FC<HeaderProps> = ({search, onSearch }) => {
 
    function handleChange(event:React.ChangeEvent<HTMLInputElement>) {
       if(event){
-         onSearch(event.target.value)
+         if(onSearch){
+            onSearch(event.target.value)
+         }
       }
       
    }
-   useEffect(() => {
-      if(search == ''){
-         setTimeout(() => {
-            setClicked(false);
-         }, 3000);
-      }
-   }, [search]);
+  
 
 
    return (
