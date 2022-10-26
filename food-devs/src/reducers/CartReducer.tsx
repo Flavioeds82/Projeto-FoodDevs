@@ -8,11 +8,11 @@ const initialState = {
    address: {
       id: 123,
       title:'Minha Casa',
-      street1: 'Beatriz Brandão',
+      street1: 'Rua das Pedras',
       number: '123',
-      zipcode: '123123-123',
-      city: 'Itaguaí',
-      state:'Rio de Janeiro'
+      zipcode: '12312-123',
+      city: 'Búzios',
+      state:'RJ'
    },
    discount: 0,
    delivery: 10

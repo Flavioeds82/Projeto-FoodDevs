@@ -6,7 +6,7 @@ import { AsideMenu } from '../../components/AsideMenu';
 import { PageBody } from '../../components/Page-Body';
 import { Cart } from '../../components/Cart';
 import Header from '../../components/Header';
-import Body from '../../components/Body';
+import Body from '../../components/HomeBody';
 import Modal from '../../components/Modal';
 
 
@@ -19,13 +19,15 @@ export const Home: React.FC<indexProps> = () => {
 
    const [headerSearch, setHeaderSearch] = useState<string>('');
    const [modalActive, setModalActive] = useState<boolean>(false);
+   const [showSearch, setShowSearch] = useState<boolean>(false);
+
 
    return (
       <Container>
          <div className="container">
             <AsideMenu/>
             <PageBody>
-               <Header search={headerSearch} onSearch={setHeaderSearch}/>
+               <Header search={headerSearch} onSearch={setHeaderSearch} showSearch={true}/>
                <Body 
                   search={headerSearch} 
                   onSearch={setHeaderSearch} 

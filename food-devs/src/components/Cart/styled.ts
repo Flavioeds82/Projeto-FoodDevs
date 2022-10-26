@@ -15,7 +15,7 @@ export const Container = styled.div`
   .container{
       width: 22rem;
       max-height: 95vh;
-      background-color: rgba(19,103,18,150);
+      background-color: RGB(19, 103, 18);
       position: fixed;
       bottom: 0;
       right: 3rem;

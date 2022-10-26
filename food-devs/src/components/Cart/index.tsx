@@ -11,6 +11,7 @@ import { CombinedState } from 'redux';
 import Modal from '../Modal';
 import styled from 'styled-components';
 import { createEmptyAction } from 'react-redux-typescript';
+import { Navigate, useNavigate } from 'react-router';
 
 
 
@@ -35,6 +36,7 @@ export const Cart: React.FC<indexProps> = () => {
    const [city, setCity] = useState<string>(address.city);
    const [state, setState] = useState<string>(address.state);
    const [zipcode, setZipcode] = useState<string>(address.zipcode);
+   const navigate = useNavigate();
    
 
    function handleCartProductChange(key: number, type: string){
@@ -43,7 +45,7 @@ export const Cart: React.FC<indexProps> = () => {
          payload:{key, type}
       })
    }
-   function getAddress(){
+   function setAddress(){
       dispatch(({
          type: "CHANGE_ADDRESS",
          payload: {
@@ -56,6 +58,13 @@ export const Cart: React.FC<indexProps> = () => {
             } 
       }));
   
+   }
+   function checkout() {
+      products.map((item:Product)=>{
+         
+      })
+      setActiveCart(false);
+      navigate("/orders")
    }
 
    function closeModal(e:any){
@@ -89,15 +98,14 @@ export const Cart: React.FC<indexProps> = () => {
       setZipcode( e.target.value );
    }
    
-   useEffect(() => {
-      
-   }, []);
+   
 
    useEffect(() => {
+      let temp = 0;
       products.map((item:Product)=>{
-         setTotal((item.price)*item.qt)
-      })
-      
+         temp += ((item.price)*item.qt)
+      })  
+      setTotal(temp)
    }, [products]);
 
 
@@ -175,7 +183,7 @@ export const Cart: React.FC<indexProps> = () => {
                         <div className="value total">{`R$ ${((total-discount)+delivery).toFixed(2)}`}</div>
                      </div>
                   </div>
-                  <div className="checkout">FINALIZAR COMPRA</div>
+                  <div className="checkout" onClick={()=>checkout()}>FINALIZAR COMPRA</div>
                </div>
             }
             {modalActive &&
