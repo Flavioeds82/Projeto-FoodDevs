@@ -9,35 +9,22 @@ import { Container } from './styled';
 
 
 
-export const Login: React.FC = ()=> {
+export const Register: React.FC = ()=> {
 
-
+   const [name, setName] = useState<string>('');
    const [email, setEmail] = useState<string>('');
    const [password, setPassword] = useState<string>('');
+   const [confirmPassword, setConfirmPassword] = useState('');
    const [disabled, setDisabled] = useState<boolean>(false);
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
-   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
-      setEmail( e.target.value );
-  }
-
-  const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
-      setPassword( e.target.value );
-  }
-  
   const handleLogin = async (e: SyntheticEvent<HTMLFormElement>) => {
    e.preventDefault();
    setDisabled(true);
-   
-   if(email && password){
-      dispatch({
-         type: "SET_PASSWORD",
-         payload:{password}
-      })
 
-      const json = await api.login(email, password);
-      navigate('/')
+   if(name && email && password){
+      const json = await api.addUser(name, email, password);
       if(json.error){
          alert('Não foi possivel efetuar o login')
       }else{
@@ -47,7 +34,6 @@ export const Login: React.FC = ()=> {
          })
          navigate('/')
       }
-
    }else{
       alert('Preencha todos os campos!');
    }
@@ -61,22 +47,46 @@ export const Login: React.FC = ()=> {
          <PageBody>
             <div className="login--container">
                <div className="title--area">
-                  <div className="title--name">Login</div>
+                  <div className="title--name">Cadastro</div>
                   <div className="title--bar"></div>
                </div>
                <form onSubmit={handleLogin}>
+               <div className="input--area">
+                        <label htmlFor="login--email">Nome</label>
+                        <input 
+                           id="login--email" 
+                           type="text" 
+                           value={name} 
+                           onChange={(e)=>setName(e.target.value)} disabled={disabled} />
+                  </div>
                   <div className="input--area">
                         <label htmlFor="login--email">Email</label>
-                        <input id="login--email" type="text" value={email} onChange={handleEmail} disabled={disabled} />
+                        <input 
+                           id="login--email" 
+                           type="text" 
+                           value={email} 
+                           onChange={(e)=>setEmail(e.target.value)} disabled={disabled} />
                   </div>
                   <div className="input--area">
                         <label htmlFor="password--login">Password</label>
-                        <input id="password--login" type="password" value={password} onChange={handlePassword} disabled={disabled} />
+                        <input 
+                           id="password--login" 
+                           type="password" 
+                           value={password} 
+                           onChange={(e)=>setPassword(e.target.value)} disabled={disabled} />
                   </div>
-                  <button>Fazer Login</button>
+                  <div className="input--area">
+                        <label htmlFor="password--login">Confirme Senha</label>
+                        <input 
+                           id="password--login" 
+                           type="password" 
+                           value={confirmPassword} 
+                           onChange={(e)=>setConfirmPassword(e.target.value)} disabled={disabled} />
+                  </div>
+                  <button>Cadastrar</button>
                </form>  
                <div className="register--area">
-               <Link to="/register" className='link'>Criar nova conta</Link>
+               <Link to="/login" className='link'>Entrar</Link>
                </div>                
             </div> 
          </PageBody>

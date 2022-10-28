@@ -25,16 +25,16 @@ export const Orders: React.FC<indexProps> = () => {
    const navigate = useNavigate();
 
 
-   useEffect(() => {
-      let temp = 0;
-      if(products.length <= 0){
-         navigate('/')
-      }
-      products.map((item:Product)=>{
-         temp += (item.price*item.qt)
-      })  
-      setTotal(temp)
-   }, [products]);
+   // useEffect(() => {
+   //    let temp = 0;
+   //    if(products.length <= 0){
+   //       navigate('/')
+   //    }
+   //    products.map((item:Product)=>{
+   //       temp += (item.price*item.qt)
+   //    })  
+   //    setTotal(temp)
+   // }, [products]);
 
    function dataAtualFormatada(){
       var data = new Date(),

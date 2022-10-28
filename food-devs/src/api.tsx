@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import qs from 'qs';
 import axios from "axios";
+import { Navigate } from "react-router";
 
 const BASE = "https://api.b7web.com.br/devsfood/api";
 
@@ -67,6 +68,30 @@ export default {
             console.log("Error : " + error)
          }
          
+},
+   addUser: async( name :string, email:string, password:string )=>{
+     
+         const body = {
+            name,
+            email,
+            password
+         }
+         try{
+            const res = await fetch(BASE+"/user", {
+            method: 'POST',
+            headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+            body: JSON.stringify(body)
+            });
+            const json = await res.json();
+            if(json.notallowed){
+               window.location.href = '/register';
+            }
+            console.log(json)
+            return json;
+         }catch{
+           return('não foi possivel efetuar o login');
+         }  
+
 },
    editUser: async (
       token:string,

@@ -13,9 +13,11 @@ type IProps = {
 export const PrivateRoute = ({ children, ...rest}:{children: JSX.Element}) => {
 
    const token = useSelector<any>(state => state.user.token);
+   const products = useSelector((state:any) => state.cart.products);
    let navigate = useNavigate();
 
    useEffect(() => {
+      console.log('token '+token);
       switch (token) {
          case (!token):
             navigate('/login')
