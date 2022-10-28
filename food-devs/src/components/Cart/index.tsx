@@ -12,6 +12,7 @@ import Modal from '../Modal';
 import styled from 'styled-components';
 import { createEmptyAction } from 'react-redux-typescript';
 import { Navigate, useNavigate } from 'react-router';
+import api from '../../api';
 
 
 
@@ -26,6 +27,7 @@ export const Cart: React.FC<indexProps> = () => {
    const discount = useSelector((state:any) => state.cart.discount);
    const delivery = useSelector((state:any) => state.cart.delivery);
    const address = useSelector((state:any) => state.cart.address);
+   const token = useSelector((state:any) => state.user.token);
    const [modalActive, setModalActive] = useState<boolean>(false);
    const [activeCart, setActiveCart] = useState<boolean>(false);
    const dispatch = useDispatch();
@@ -59,8 +61,27 @@ export const Cart: React.FC<indexProps> = () => {
       }));
   
    }
-   function checkout() {
+   async function checkout() {
       setActiveCart(false);
+      const json = await api.getUser(token);
+      if(json.error == ''){
+         const lastAdrress = json.result.addresses.length -1;
+         console.log("teste " + json.result.addresses[lastAdrress].title)
+         setAddressTitle( json.result.addresses[lastAdrress].title)
+         setStreet (json.result.addresses[lastAdrress].street1)
+         setNumber(json.result.addresses[lastAdrress].number)
+         setZipcode(json.result.addresses[lastAdrress].zipcode)
+         setCity(json.result.addresses[lastAdrress].city)
+         setState( json.result.addresses[lastAdrress].state)
+      }else{
+         console.log('error' + json.error)
+         if(json.error != ''){
+            alert('Tempo expirado, faça login novamente')
+            navigate('/login')
+            return;
+         }
+      }
+      setAddress();
       navigate("/orders")
    }
 
@@ -104,6 +125,8 @@ export const Cart: React.FC<indexProps> = () => {
       })  
       setTotal(temp)
    }, [products]);
+
+   
 
 
    return (

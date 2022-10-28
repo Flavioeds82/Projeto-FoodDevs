@@ -18,6 +18,7 @@ export const Orders: React.FC<indexProps> = () => {
 
    const [modalActive, setModalActive] = useState<boolean>(false);
    const products = useSelector((state:any) => state.cart.products);
+   const token =  useSelector((state:any) => state.user.token);
    const discount = useSelector((state:any) => state.cart.discount);
    const delivery = useSelector((state:any) => state.cart.delivery);
    const address = useSelector((state:any) => state.cart.address);
@@ -25,16 +26,20 @@ export const Orders: React.FC<indexProps> = () => {
    const navigate = useNavigate();
 
 
-   // useEffect(() => {
-   //    let temp = 0;
-   //    if(products.length <= 0){
-   //       navigate('/')
-   //    }
-   //    products.map((item:Product)=>{
-   //       temp += (item.price*item.qt)
-   //    })  
-   //    setTotal(temp)
-   // }, [products]);
+   useEffect(() => {
+      let count = 0;
+      if(!token || token === '' || token === undefined){
+         navigate('/login')
+         return;
+      }
+      if(products.length <= 0){
+         navigate('/')
+      }
+      products.map((item:Product)=>{
+         count += (item.price*item.qt)
+      })  
+      setTotal(count)
+   }, [products]);
 
    function dataAtualFormatada(){
       var data = new Date(),

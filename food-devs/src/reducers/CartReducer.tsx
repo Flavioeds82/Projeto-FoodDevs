@@ -38,7 +38,6 @@ export default (state = initialState, action: AnyAction)=>{
          break;
 
       case "CHANGE_ADDRESS":
-         
             state.address.title =  action.payload.title,
             state.address.street1 =  action.payload.street,
             state.address.number =  action.payload.number,
@@ -46,7 +45,7 @@ export default (state = initialState, action: AnyAction)=>{
             state.address.city =  action.payload.city,
             state.address.state = action.payload.state
          
-         return {state};
+         return {...state};
          break;
    
       case "CHANGE_PRODUCT":
