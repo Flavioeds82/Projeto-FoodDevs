@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Container from './styled';
 import api from '../../api';
 import { Category, Product, Products } from '../../types';
@@ -27,11 +27,12 @@ const Body: React.FC<BodyProps> = ({search, onSearch, modalActive, setModalActiv
    const [selectedProduct, setSelectedProduct] = useState<Product|undefined>(undefined)
    const sp = selectedProduct;
    const dispatch = useDispatch();
+   const user = useSelector((state:any) => state.user);
+
 
    async function getProducts(){
       const res = await api.getProducts(activeCategory, search);
       setProducts(res.data);
-      console.log(activeCategory)
    }
 
    function handleProductClick(item:Product){
@@ -56,14 +57,6 @@ const Body: React.FC<BodyProps> = ({search, onSearch, modalActive, setModalActiv
       }
       getCategories();
    }, []);
-
-   // useEffect(() => {
-      
-   //    if(selectedProduct){
-   //       setModalActive(true);
-   //    }
-      
-   // }, [selectedProduct]);
 
    useEffect(() => {
       

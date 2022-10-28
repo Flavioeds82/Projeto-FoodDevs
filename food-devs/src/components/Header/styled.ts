@@ -14,7 +14,7 @@ export const Container = styled.div`
       background-color: rgba(19,103,18,150);
       margin: auto;
       margin-top: 1rem;
-      border-radius: 0.3rem;
+      border-radius: 1rem;
       padding: 1rem;
 
       .header-logo{

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   .container{
     display: flex;
+    justify-content: center;
     
     h1{
         text-align: center;

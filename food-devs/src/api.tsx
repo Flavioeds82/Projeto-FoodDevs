@@ -1,5 +1,8 @@
 import { fieldList } from "./types";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import qs from 'qs';
+import axios from "axios";
 
 const BASE = "https://api.b7web.com.br/devsfood/api";
 
@@ -26,7 +29,6 @@ async function apiFetchPost(
       headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
       body: JSON.stringify(body)
       });
-      console.log(body)
       const json = await res.json();
       if(json.notallowed){
          window.location.href = '/signin';
@@ -38,6 +40,61 @@ async function apiFetchPost(
 };
 
 export default {
+
+   editAddress: async (
+      token:string,
+      data: 
+         {
+         newaddress:{
+              
+               title ?:string, 
+               street1 ?:string, 
+               number ?:string,  
+               zipcode ?:string, 
+               city ?: string,
+               state ?: string
+            }
+         }
+         )=>{
+
+         let query = new URLSearchParams(token).toString();
+         console.log("QUERY "+ query)
+         try {
+            const req = await axios.put(BASE+`/user?token=${query}`, data)
+            return req.data
+         } catch (error) {
+            alert("Não foi possivel alterar o endereço, faça o login e tente novamente.")
+            console.log("Error : " + error)
+         }
+         
+},
+   editUser: async (
+      token:string,
+      data: 
+      {
+         name ?:string, 
+         email ?:string, 
+         password ?:string,  
+         password_confirm ?:string 
+      }
+         
+         )=>{
+
+         let query = new URLSearchParams(token).toString();
+         console.log("QUERY "+ query)
+         try {
+            const req = await axios.put(BASE+`/user?token=${query}`, data)
+            return req.data
+         } catch (error) {
+            alert("Não foi possivel alterar o endereço, faça o login e tente novamente.")
+            console.log("Error : " + error)
+         }
+         
+   },
+
+
+      
+
    getCategories: async ()=>{
       try {
          const response = await fetch(`${BASE}/categories`);
@@ -48,6 +105,9 @@ export default {
          return error;
       }  
    },
+   
+   
+
    getProducts: async (category?: number, search?: string)=>{
       try {
          let fields: any = {};
@@ -61,7 +121,6 @@ export default {
          }
 
          let query = new URLSearchParams(fields).toString();
-         // console.log(category)
          const response = await fetch(`${BASE}/products?${query}`);
          const json = await response.json();
          if(json.error != ""){throw json.error;}
@@ -72,12 +131,32 @@ export default {
          return error;
       }
    },
-   login:async (email: string, password: string) => {
+
+   login: async (email: string, password: string) => {
       const json = await apiFetchPost(
          '/login',
          {email, password}
       );
-      console.log(json)
+      return json;
+   },
+
+   logout: async (token: string) => {
+      let query = new URLSearchParams(token).toString();
+      const response = await fetch(`${BASE}/logout?token=${query}`);
+      const json = await response.json();
+      return json;
+   },
+
+   getUser: async function(token: string) {
+      let query = new URLSearchParams(token).toString();
+      const response = await fetch(`${BASE}/user?token=${query}`);
+      const json = await response.json();
+      return json;
+   },
+   getDelivery: async function(token: string, id?:number, street1?:string, city?:string, state?:string) {
+      let query = new URLSearchParams(token).toString();
+      const response = await fetch(`${BASE}/deliverycalc?token=${query}`);
+      const json = await response.json();
       return json;
    }
 };

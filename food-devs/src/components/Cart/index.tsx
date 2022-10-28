@@ -60,9 +60,6 @@ export const Cart: React.FC<indexProps> = () => {
   
    }
    function checkout() {
-      products.map((item:Product)=>{
-         
-      })
       setActiveCart(false);
       navigate("/orders")
    }

@@ -13,21 +13,21 @@ type IProps = {
 export const PrivateRoute = ({ children, ...rest}:{children: JSX.Element}) => {
 
    const token = useSelector<any>(state => state.user.token);
-   const products = useSelector<any>(state => state.cart.products);
-   // const token = 123;
    let navigate = useNavigate();
-   console.log(`Token : ${token}`);
 
    useEffect(() => {
-      if (!token || token === '') {
-        navigate('/login')
+      switch (token) {
+         case (!token):
+            navigate('/login')
+            break;
+         case (token == ''):
+            navigate('/login')
+            break;
+         case (token == undefined):
+            navigate('/login')
+            break;
       }
-      if(products == ''){ 
-         navigate('/')
-      }
-      
-    }, []);
-    return children;
-   
-     
+   }, []);
+
+   return children;  
 };

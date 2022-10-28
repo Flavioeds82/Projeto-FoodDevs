@@ -1,6 +1,6 @@
 import React, { ChangeEvent, ReactElement, SyntheticEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { json, Navigate, useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import api from '../../api';
 import { AsideMenu } from '../AsideMenu';
@@ -29,17 +29,25 @@ export const Login: React.FC = ()=> {
   const handleLogin = async (e: SyntheticEvent<HTMLFormElement>) => {
    e.preventDefault();
    setDisabled(true);
+
    if(email && password){
+      dispatch({
+         type: "SET_PASSWORD",
+         payload:{password}
+      })
+
       const json = await api.login(email, password);
+      navigate('/')
       if(json.error){
-         console.log(json.error)
+         alert('Não foi possivel efetuar o login')
       }else{
          dispatch({
             type: "SET_TOKEN",
-            payload: {token: json.result.token}
+            payload:{token:json.result.token}
          })
          navigate('/')
       }
+
    }else{
       alert('Preencha todos os campos!');
    }

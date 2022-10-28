@@ -30,7 +30,7 @@ export const Container = styled.div`
 
      .cart-header{
         display: flex;
-        height: 1.5rem;
+        height: 1rem;
         padding: 0.8rem;
         
 
@@ -220,6 +220,6 @@ export const Container = styled.div`
             padding: 8px 4px;
             margin-left: 15px;
         }
-    }
+      }
   }
 `;

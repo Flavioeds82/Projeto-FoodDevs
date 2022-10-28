@@ -12,7 +12,8 @@ const initialState = {
       number: '123',
       zipcode: '12312-123',
       city: 'Búzios',
-      state:'RJ'
+      district: "Centro",
+      state:'Rio de Janeiro'
    },
    discount: 0,
    delivery: 10
@@ -33,7 +34,6 @@ export default (state = initialState, action: AnyAction)=>{
                qt: action.payload.modalQt
             })
          }
-         console.log(products)
          return {...state, products: products};
          break;
 

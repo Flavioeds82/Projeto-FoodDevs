@@ -21,6 +21,7 @@ export const Home: React.FC<indexProps> = () => {
    const [modalActive, setModalActive] = useState<boolean>(false);
    const [showSearch, setShowSearch] = useState<boolean>(false);
 
+  
 
    return (
       <Container>

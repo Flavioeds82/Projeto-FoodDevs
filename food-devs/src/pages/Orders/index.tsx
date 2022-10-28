@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router';
 import { AsideMenu } from '../../components/AsideMenu';
 import { Cart } from '../../components/Cart';
 import Header from '../../components/Header';
@@ -21,11 +22,14 @@ export const Orders: React.FC<indexProps> = () => {
    const delivery = useSelector((state:any) => state.cart.delivery);
    const address = useSelector((state:any) => state.cart.address);
    const [total, setTotal] = useState<number>(0);
-   const date = new Date();
+   const navigate = useNavigate();
 
 
    useEffect(() => {
       let temp = 0;
+      if(products.length <= 0){
+         navigate('/')
+      }
       products.map((item:Product)=>{
          temp += (item.price*item.qt)
       })  
