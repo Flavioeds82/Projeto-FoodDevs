@@ -63,25 +63,6 @@ export const Cart: React.FC<indexProps> = () => {
    }
    async function checkout() {
       setActiveCart(false);
-      const json = await api.getUser(token);
-      if(json.error == ''){
-         const lastAdrress = json.result.addresses.length -1;
-         console.log("teste " + json.result.addresses[lastAdrress].title)
-         setAddressTitle( json.result.addresses[lastAdrress].title)
-         setStreet (json.result.addresses[lastAdrress].street1)
-         setNumber(json.result.addresses[lastAdrress].number)
-         setZipcode(json.result.addresses[lastAdrress].zipcode)
-         setCity(json.result.addresses[lastAdrress].city)
-         setState( json.result.addresses[lastAdrress].state)
-      }else{
-         console.log('error' + json.error)
-         if(json.error != ''){
-            alert('Tempo expirado, faça login novamente')
-            navigate('/login')
-            return;
-         }
-      }
-      setAddress();
       navigate("/orders")
    }
 
